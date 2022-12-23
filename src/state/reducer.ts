@@ -1,20 +1,14 @@
-import { TStoreProducts, TProduct } from './state';
+import {TStoreProducts, TProduct} from './state';
 import {ProductsActions, ActionType, AddProduct, RemoveProduct} from './actions';
 
-export function productsReducer(state : TStoreProducts, action : ProductsActions): TStoreProducts {
+export function productsReducer(state : TProduct, action : ProductsActions): TProduct {
     switch (action.type) {
         case ActionType.AddProduct:
             return {
                 ... state,
-              //   products: state.products.map((product: TStoreProducts) =>
-              //   product.id === action.payload.selectedItem.id
-              //     ? {
-              //         ...product,
-              //         countInStock: {20 - action.payload.numOfSelectedProduct}
-              //       }
-              //     : product
-              // ),
-              numOfSelectedProducts: action.payload.numOfSelectedProduct        
+                products: [... state.products, action.payload.product],
+                numOfSelectedProducts: action.payload.numOfSelectedProduct
+
             };
         default:
             return state;
@@ -22,10 +16,10 @@ export function productsReducer(state : TStoreProducts, action : ProductsActions
 }
 
 
-export const addProduct = (product: TStoreProducts,numOfSelectedProduct  : number ) : AddProduct => ({
-  type: ActionType.AddProduct, 
-  payload: {product, numOfSelectedProduct}
+export const addProduct = (product : TStoreProducts, numOfSelectedProduct : number) : AddProduct => ({
+    type: ActionType.AddProduct,
+    payload: {
+        product,
+        numOfSelectedProduct
+    }
 });
-
-
-

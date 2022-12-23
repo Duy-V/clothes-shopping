@@ -14,12 +14,15 @@ function DetailedProduct() {
     let { id } = useParams();
     let [numOfSelectedProduct, setNumOfSelectedProduct] = useState<number>(0)
     const handleAdd = (product: TStoreProducts) => {
-        setNumOfSelectedProduct(numOfSelectedProduct++);
+        console.log('duy hi', state, product.id)
         state.products.map((selectedProduct) => {
             if (selectedProduct.id = product.id) {
-                product.countInStock = selectedProduct.countInStock - 1
+                product.countInStock = product.countInStock - 1
+                setNumOfSelectedProduct(numOfSelectedProduct++)
             }
         })
+
+        console.log('duy hi', numOfSelectedProduct)
         dispatch(addProduct(product, numOfSelectedProduct));
     }
     return (

@@ -1,7 +1,6 @@
 export interface TProduct {
     products: TStoreProducts[],
-    numOfSelectedProducts?: number
-    
+    numOfSelectedProducts?: number  
 }
 export interface TStoreProducts {
     name: string,
