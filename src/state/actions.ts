@@ -6,7 +6,7 @@ export enum ActionType {
   
   export interface AddProduct {
     type: ActionType.AddProduct;
-    payload: {product:TStoreProducts, numOfSelectedProduct: number};
+    payload: {product:TStoreProducts, numOfSelectedProduct?: number};
   }
  
   export interface RemoveProduct {

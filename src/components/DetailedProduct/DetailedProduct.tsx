@@ -15,34 +15,37 @@ function DetailedProduct() {
     let [numOfSelectedProduct, setNumOfSelectedProduct] = useState<number>(0)
     const handleAdd = (product: TStoreProducts) => {
         console.log('duy hi', state, product.id)
-        state.products.map((selectedProduct) => {
-            if (selectedProduct.id = product.id) {
-                product.countInStock = product.countInStock - 1
-                setNumOfSelectedProduct(numOfSelectedProduct++)
-            }
-        })
+        state.products.filter(p => p.id == product.id).map((selectedProduct: TStoreProducts) => {
+            selectedProduct.countInStock = selectedProduct.countInStock - 1
 
+
+        })
+        numOfSelectedProduct++
+        setNumOfSelectedProduct(numOfSelectedProduct)
         console.log('duy hi', numOfSelectedProduct)
         dispatch(addProduct(product, numOfSelectedProduct));
+
     }
     return (
         <div className="">
-            {state.products.filter(item => item.id == id).map((selectedItem: TStoreProducts) => (
-                <div className="flex flex-row justify-center gap-x-5 h-[100vh]" key={selectedItem.id}>
-                    <div>
-                        <img src={`${selectedItem.image}`} alt="Girl in a jacket" width="300" height="400" />
+            {state.products.map((selectedItem: TStoreProducts) => (
+                selectedItem.id == id && (
+                    <div className="flex flex-row justify-center gap-x-5 h-[100vh]" key={selectedItem.id}>
+                        <div>
+                            <img src={`${selectedItem.image}`} alt="Girl in a jacket" width="300" height="400" />
 
+                        </div>
+                        <div className="flex flex-col pt-10">
+                            <h4>{selectedItem.name}</h4>
+                            <h4>{selectedItem.price}</h4>
+                            <h4>{selectedItem.rating}</h4>
+                            <h4>{selectedItem.description}</h4>
+                            <h4>{selectedItem.brand}</h4>
+                            <h4>{selectedItem.countInStock}</h4>
+                            <button className="flex justify-center rounded-lg px-6 py-3 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 mt-[20px]" onClick={() => handleAdd(selectedItem)}> <FontAwesomeIcon icon={faCartPlus} /></button>
+                        </div>
                     </div>
-                    <div className="flex flex-col pt-10">
-                        <h4>{selectedItem.name}</h4>
-                        <h4>{selectedItem.price}</h4>
-                        <h4>{selectedItem.rating}</h4>
-                        <h4>{selectedItem.description}</h4>
-                        <h4>{selectedItem.brand}</h4>
-                        <h4>{selectedItem.countInStock}</h4>
-                        <button className="flex justify-center rounded-lg px-6 py-3 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 mt-[20px]" onClick={() => handleAdd(selectedItem)}> <FontAwesomeIcon icon={faCartPlus} /></button>
-                    </div>
-                </div>
+                )
             ))}
         </div>
     )

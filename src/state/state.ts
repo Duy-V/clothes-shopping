@@ -102,6 +102,21 @@ export const  initialState : TProduct ={
             description: 'A popular pants',
             id: 6,
         },
+        {
+            name: 'Free Shirt',
+            slug: 'free-shirt',
+            category: 'Shirts',
+            image: '/src/assets/imgs/shirt1.jpg',
+            price: 70,
+            brand: 'Nike',
+            rating: 4.5,
+            numReviews: 8,
+            countInStock: 20,
+            description: 'A popular shirt',
+            isFeatured: true,
+            banner: '/src/assets/imgs/banner1.jpg',
+            id: 7
+        },
     ],
     numOfSelectedProducts: 0
 }

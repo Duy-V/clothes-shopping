@@ -1,5 +1,5 @@
-import React, { useState, createContext, useContext } from "react";
-import { initialState, TProduct, TStoreProducts } from './state';
+import React from "react";
+import { initialState, TProduct } from './state';
 import { ProductsActions } from './actions';
 
 
