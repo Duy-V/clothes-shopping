@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import HomePage from '../../pages/HomePage/HomePage';
+import { ProductsContext } from "../../state/context"
+import { openCart } from '../../state/reducer';
 function NavBar() {
+    const { state, dispatch } = useContext(ProductsContext)
 
+    const [isOpen, setIsOpen] = useState(true)
+
+    const handleIsOpen = () => {
+        setIsOpen(!isOpen)
+        console.log(isOpen)
+        dispatch(openCart(isOpen))
+    }
 
     return (
         <div className="flex flex-row flex-wrap mb-[50px] bg-[#F6DBAD]">
@@ -22,7 +32,7 @@ function NavBar() {
 
             </div>
             <button className="basis-1/4 rounded-full"
-                onClick={() => { }}
+                onClick={() => handleIsOpen()}
                 style={{ width: "3rem", height: "3rem", position: "relative" }}
             >
                 <FontAwesomeIcon icon={faCartPlus} />

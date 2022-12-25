@@ -1,5 +1,5 @@
 import {TStoreProducts, TProduct} from './state';
-import {ProductsActions, ActionType, AddProduct, RemoveProduct} from './actions';
+import { ProductsActions, ActionType, AddProduct, RemoveProduct, OpenCart } from './actions';
 
 export function productsReducer(state : TProduct, action : ProductsActions): TProduct {
     switch (action.type) {
@@ -18,6 +18,13 @@ export function productsReducer(state : TProduct, action : ProductsActions): TPr
               ),
                 numOfSelectedProducts: newNumOfSelectedProducts
             };
+            case ActionType.OpenCart:
+                let isOpen = action.payload.isOpen
+            console.log(isOpen)
+                return {
+                    ...state,
+                    openCart: ()=> (isOpen)
+                }
         default:
             return state;
     }
@@ -30,4 +37,9 @@ export const addProduct = (product : TStoreProducts, numOfSelectedProduct : numb
         product,
         numOfSelectedProduct
     }
+});
+
+export const openCart = (isOpen: boolean) : OpenCart => ({
+    type: ActionType.OpenCart,
+    payload: {isOpen}
 });

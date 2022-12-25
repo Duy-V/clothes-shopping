@@ -7,7 +7,7 @@ import { useReducer } from "react"
 import { ProductsContext } from './state/context';
 import FooterPage from './pages/FooterPage/FooterPage';
 import NavBar from './components/NavBar/NavBar';
-
+import Cart from "./components/Cart/Cart";
 function App() {
   const [state, dispatch] = useReducer(productsReducer, initialState);
 
@@ -17,6 +17,7 @@ function App() {
     <ProductsContext.Provider value={{ state, dispatch }}>
       <div>
         <NavBar />
+        <Cart />
         <Outlet />
         <FooterPage />
       </div>

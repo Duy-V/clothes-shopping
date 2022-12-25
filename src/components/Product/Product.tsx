@@ -10,8 +10,6 @@ import { faMoneyBillWave } from '@fortawesome/free-solid-svg-icons'
 //relative path, absolute Path
 type Props = {
     product: TStoreProducts,
-
-
 }
 function Product({ product }: Props) {
     const navigate = useNavigate();

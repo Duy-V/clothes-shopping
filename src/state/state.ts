@@ -1,6 +1,12 @@
 export interface TProduct {
     products: TStoreProducts[],
-    numOfSelectedProducts?: number  
+    numOfSelectedProducts?: number,
+    openCart: () => void,
+  closeCart: () => void,
+    getItemQuantity: (id: number) => number,
+    increaseCartQuantity: (id: number) => void,
+    decreaseCartQuantity: (id: number) => void,
+    removeFromCart: (id: number) => void
 }
 export interface TStoreProducts {
     name: string,
@@ -118,5 +124,11 @@ export const  initialState : TProduct ={
             id: 7
         },
     ],
-    numOfSelectedProducts: 0
+    numOfSelectedProducts: 0,
+    openCart: ()=> false,
+    closeCart: ()=> true,
+    getItemQuantity: (id: number) => 0,
+    increaseCartQuantity: (id: number) => 0,
+    decreaseCartQuantity: (id: number) => 0,
+    removeFromCart: (id: number) => 0,
 }

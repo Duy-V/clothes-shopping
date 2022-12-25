@@ -1,7 +1,7 @@
 import {TStoreProducts} from "../state/state"
 export enum ActionType {
     AddProduct,
-   RemoveProduct
+   RemoveProduct, OpenCart , CloseCart
   }
   
   export interface AddProduct {
@@ -13,6 +13,15 @@ export enum ActionType {
     type: ActionType.RemoveProduct;
     payload: { id: number; };
   }
+
+  export interface OpenCart {
+    type: ActionType.OpenCart;
+    payload: { isOpen: boolean; };
+  }
+  export interface CloseCart {
+    type: ActionType.CloseCart;
+    payload: { isOpen: boolean; };
+  }
   
   
-  export type ProductsActions = AddProduct  | RemoveProduct;
+  export type ProductsActions = AddProduct  | RemoveProduct | OpenCart | CloseCart;
