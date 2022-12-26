@@ -8,36 +8,58 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import useLocalStorage from '../../useLocalStorage';
 function DetailedProduct() {
     const { state, dispatch } = useContext(ProductsContext)
-    const [selectedItems, setSelectedItems] = useLocalStorage<TStoreProducts[]>("storedSelectedItems", []);
-
-    // must push id and the count of click which meaning add
-
-    console.log(state)
+    const [cartItems, setCartItems] = useLocalStorage<TStoreProducts[]>("storedSelectedItems", []);
     let { id } = useParams();
     let [numOfSelectedProduct, setNumOfSelectedProduct] = useState<number>(0)
-    const filterTheRepeatedItem = (selectedItems: TStoreProducts[]) => {
-        for (let i = 0; i < selectedItems.length; i++) {
-            for (let j = 1; j < selectedItems.length; j++) {
-                if (selectedItems[i].id == selectedItems[j].id) {
-                    selectedItems.splice(selectedItems[i], 1)
-                    console.log("ddd")
-                }
-            }
+    //them "quantity" bằng cách này thì localStorage không cập nhật.
+    // state.products.map((newProduct: TStoreProducts) => {
+    //     newProduct["quantity"] = 0
+
+    // })
+    // còn thêm như bên dưới thì có 1 vấn đề, cái click đầu tiền nó không ăn quantity
+    console.log(state.products)
+    const handleAdd = (product: TStoreProducts) => {
+        console.log('duy hi', state, product)
+        let index = cartItems.findIndex(function (item) {
+            return item.id === product.id;
+        });
+        console.log(index)
+        product.quantity++
+        if (cartItems.length == 0) {
+
+            setCartItems([...cartItems, product])
+        }
+        if (cartItems.length > 0) {
+            cartItems.map((cartItem) => {
+                cartItem.quantity = product.quantity,
+                    cartItem.id === product.id ? (
+                        cartItems.splice(index, 1),
+                        setCartItems([...cartItems, cartItem])
+                    ) : (setCartItems([...cartItems, product]))
+            })
         }
     }
-    const handleAdd = (product: TStoreProducts) => {
-        console.log('duy hi', state, product.id)
+    // cartItems.map((cartItem) => {
+    //     if (cartItem.id === product.id) {
+    //         cartItems.splice(indexOf(cartItem.id), 1)
+    //     }
+    // })
 
-        state.products.filter(p => p.id == product.id).map((selectedProduct: TStoreProducts) => {
-            selectedProduct.countInStock = selectedProduct.countInStock - 1
-            setSelectedItems([...selectedItems, product])
-            filterTheRepeatedItem(selectedItems)
-        })
-        numOfSelectedProduct++
-        setNumOfSelectedProduct(numOfSelectedProduct)
-        dispatch(addProduct(product, numOfSelectedProduct));
 
-    }
+
+
+    // kiểm tra item mới đã có trong state hat chưa
+    // state.products.filter(p => p.id == product.id).map((selectedProduct: TStoreProducts) => {
+    //     selectedProduct.countInStock = selectedProduct.countInStock - 1
+    //     setSelectedItems([...selectedItems, product])
+
+    // })
+
+    // numOfSelectedProduct++
+    // setNumOfSelectedProduct(numOfSelectedProduct)
+    // dispatch(addProduct(product, numOfSelectedProduct));
+
+
 
     // const addNote = (selectedItem: TStoreProducts) => {
     //     console.log(selectedItem)

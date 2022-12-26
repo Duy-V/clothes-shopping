@@ -22,6 +22,7 @@ export interface TStoreProducts {
     isFeatured?: boolean,
     banner?: string,
     id?: number|string,
+    quantity: number
 }
 
 export const  initialState : TProduct ={
@@ -39,8 +40,11 @@ export const  initialState : TProduct ={
             description: 'A popular shirt',
             isFeatured: true,
             banner: '/src/assets/imgs/banner1.jpg',
-            id: 1
+            id: 1,
+            quantity: 0
         },
+            
+        
         {
             name: 'Fit Shirt',
             slug: 'fit-shirt',
@@ -54,7 +58,8 @@ export const  initialState : TProduct ={
             description: 'A popular shirt',
             isFeatured: true,
             banner: '/src/assets/imgs/banner2.jpg',
-            id: 2
+            id: 2,
+        quantity: 0
         },
         {
             name: 'Slim Shirt',
@@ -67,7 +72,8 @@ export const  initialState : TProduct ={
             numReviews: 3,
             countInStock: 20,
             description: 'A popular shirt',
-            id: 3
+            id: 3,
+            quantity: 0
         },
         {
             name: 'Golf Pants',
@@ -80,7 +86,8 @@ export const  initialState : TProduct ={
             numReviews: 13,
             countInStock: 20,
             description: 'Smart looking pants',
-            id: 4
+            id: 4,
+            quantity: 0
         },
         {
             name: 'Fit Pants',
@@ -93,7 +100,8 @@ export const  initialState : TProduct ={
             numReviews: 7,
             countInStock: 20,
             description: 'A popular pants',
-            id: 5
+            id: 5,
+            quantity: 0
         },
         {
             name: 'Classic Pants',
@@ -107,6 +115,7 @@ export const  initialState : TProduct ={
             countInStock: 20,
             description: 'A popular pants',
             id: 6,
+            quantity: 0
         },
         {
             name: 'Free Shirt',
@@ -121,7 +130,8 @@ export const  initialState : TProduct ={
             description: 'A popular shirt',
             isFeatured: true,
             banner: '/src/assets/imgs/banner1.jpg',
-            id: 7
+            id: 7,
+            quantity: 0
         },
     ],
     numOfSelectedProducts: 0,
