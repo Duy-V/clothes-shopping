@@ -15,23 +15,23 @@ function DetailedProduct() {
     console.log(state)
     let { id } = useParams();
     let [numOfSelectedProduct, setNumOfSelectedProduct] = useState<number>(0)
-    // const filterTheSameItem = (selectedItems: TStoreProducts[]) => {
-    //     for (let i = 0; i < selectedItems.length; i++) {
-    //         for (let j = 1; j < selectedItems.length; j++) {
-    //             if (selectedItems[i].id == selectedItems[j].id) {
-    //                 selectedItems.splice(selectedItems[i])
-    //                 console.log("ddd")
-    //             }
-    //         }
-    //     }
-    // }
+    const filterTheRepeatedItem = (selectedItems: TStoreProducts[]) => {
+        for (let i = 0; i < selectedItems.length; i++) {
+            for (let j = 1; j < selectedItems.length; j++) {
+                if (selectedItems[i].id == selectedItems[j].id) {
+                    selectedItems.splice(selectedItems[i], 1)
+                    console.log("ddd")
+                }
+            }
+        }
+    }
     const handleAdd = (product: TStoreProducts) => {
         console.log('duy hi', state, product.id)
 
         state.products.filter(p => p.id == product.id).map((selectedProduct: TStoreProducts) => {
             selectedProduct.countInStock = selectedProduct.countInStock - 1
             setSelectedItems([...selectedItems, product])
-
+            filterTheRepeatedItem(selectedItems)
         })
         numOfSelectedProduct++
         setNumOfSelectedProduct(numOfSelectedProduct)
