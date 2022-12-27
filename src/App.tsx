@@ -10,15 +10,36 @@ import NavBar from './components/NavBar/NavBar';
 import Cart from "./components/Cart/Cart";
 function App() {
   const [state, dispatch] = useReducer(productsReducer, initialState);
+  let isOpen = state.openCart()
 
 
 
   return (
     <ProductsContext.Provider value={{ state, dispatch }}>
       <div>
-        <NavBar />
-        <Cart />
-        <Outlet />
+        <div >
+
+          <NavBar />
+          {
+            isOpen ? (<div>
+
+
+
+              <Outlet />
+
+
+
+              <div className="mt-[-203.7vh]">
+
+                <Cart />
+              </div>
+            </div>) : (<div className="mt-[8vh]">
+
+              <Outlet />
+            </div>)
+          }
+        </div>
+
         <FooterPage />
       </div>
     </ProductsContext.Provider>

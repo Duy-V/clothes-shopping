@@ -4,9 +4,12 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import HomePage from '../../pages/HomePage/HomePage';
 import { ProductsContext } from "../../state/context"
 import { openCart } from '../../state/reducer';
+import { useReadLocalStorage } from 'usehooks-ts';
+import { TStoreProducts } from "../../state/state"
 function NavBar() {
     const { state, dispatch } = useContext(ProductsContext)
-
+    const cartItems = useReadLocalStorage<TStoreProducts[]>('storedSelectedItems')
+    console.log(cartItems)
     const [isOpen, setIsOpen] = useState(true)
 
     const handleIsOpen = () => {
@@ -35,9 +38,19 @@ function NavBar() {
                 onClick={() => handleIsOpen()}
                 style={{ width: "3rem", height: "3rem", position: "relative" }}
             >
-                <FontAwesomeIcon icon={faCartPlus} />
+                <div>
+
+                    <FontAwesomeIcon icon={faCartPlus} className="h-7" />
+
+                    <strong className=" ">
+                        {cartItems?.reduce((accumulator, currentValue) => {
+                            return accumulator + currentValue.quantity
+                        }, 0)}
+                    </strong>
+                </div>
+                {/* <FontAwesomeIcon icon={faCartPlus} /> */}
             </button>
-        </div>
+        </div >
 
     )
 }

@@ -7,6 +7,9 @@ module.exports = {
     extend: {},
     container: {
       center: true,
+      zIndex: {
+       '-10': '-10',
+                }
     },
   },
   plugins: [],

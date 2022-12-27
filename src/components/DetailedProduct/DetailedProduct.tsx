@@ -8,7 +8,7 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import useLocalStorage from '../../useLocalStorage';
 function DetailedProduct() {
     const { state, dispatch } = useContext(ProductsContext)
-    const [cartItems, setCartItems] = useLocalStorage<TStoreProducts[]>("storedSelectedItems", []);
+    let [cartItems, setCartItems] = useLocalStorage<TStoreProducts[]>("storedSelectedItems", []);
     let { id } = useParams();
     let [numOfSelectedProduct, setNumOfSelectedProduct] = useState<number>(0)
     //them "quantity" bằng cách này thì localStorage không cập nhật.
@@ -23,49 +23,21 @@ function DetailedProduct() {
         let index = cartItems.findIndex(function (item) {
             return item.id === product.id;
         });
-        console.log(index)
-        product.quantity++
-        if (cartItems.length == 0) {
 
-            setCartItems([...cartItems, product])
-        }
-        if (cartItems.length > 0) {
-            cartItems.map((cartItem) => {
-                cartItem.quantity = product.quantity,
-                    cartItem.id === product.id ? (
-                        cartItems.splice(index, 1),
-                        setCartItems([...cartItems, cartItem])
-                    ) : (setCartItems([...cartItems, product]))
+        if (index > -1) {
+            let newCartItems = cartItems.map((cartItem) => {
+
+                return cartItem.id === product.id ? { ...cartItem, quantity: cartItem.quantity + 1 }
+                    : cartItem
             })
+            setCartItems(newCartItems)
+        } else {
+
+            setCartItems([...cartItems, { ...product, quantity: 1 }])
         }
+
     }
-    // cartItems.map((cartItem) => {
-    //     if (cartItem.id === product.id) {
-    //         cartItems.splice(indexOf(cartItem.id), 1)
-    //     }
-    // })
 
-
-
-
-    // kiểm tra item mới đã có trong state hat chưa
-    // state.products.filter(p => p.id == product.id).map((selectedProduct: TStoreProducts) => {
-    //     selectedProduct.countInStock = selectedProduct.countInStock - 1
-    //     setSelectedItems([...selectedItems, product])
-
-    // })
-
-    // numOfSelectedProduct++
-    // setNumOfSelectedProduct(numOfSelectedProduct)
-    // dispatch(addProduct(product, numOfSelectedProduct));
-
-
-
-    // const addNote = (selectedItem: TStoreProducts) => {
-    //     console.log(selectedItem)
-    //     setselectedItems([...selectedItems, selectedItem])
-
-    // }
     return (
         <div className="">
             {state.products.map((selectedItem: TStoreProducts) => (

@@ -14,7 +14,7 @@ function Cart() {
 
     return (
         <div>
-            {isOpen ? (<div>
+            {isOpen ? (
                 <body className="font-poppins antialiased mt-[-50px] z-10 " >
                     <div
                         id="view"
@@ -57,15 +57,20 @@ function Cart() {
                                     )
 
                                 })}
-
-                                <button className="flex justify-center rounded-lg px-6 py-3  text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 mb-[20px]" onClick={() => { }}> Total : { }</button>
+                                <div>
+                                    <span className="mr-3 ">Price:  {cartItems?.reduce((accumulator, currentValue) => {
+                                        return accumulator + currentValue.quantity * currentValue.price;
+                                    }, 0)}
+                                    </span>
+                                </div>
+                                <button className="flex justify-center rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900" > THANH TOÁN</button>
                             </div>
                         </div>
                     </div >
 
 
                 </body >
-            </div>
+
             ) : ""}
 
 
