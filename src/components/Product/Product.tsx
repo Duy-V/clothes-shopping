@@ -6,36 +6,36 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import { faStore } from '@fortawesome/free-solid-svg-icons'
 import { faMoneyBillWave } from '@fortawesome/free-solid-svg-icons'
 import { useLocalStorage } from 'usehooks-ts';
-
+import useCart from '../../useCart';
 //relative path, absolute Path
 type Props = {
     product: TStoreProducts,
 }
 function Product({ product }: Props) {
     const navigate = useNavigate();
-    let [cartItems, setCartItems] = useLocalStorage<TStoreProducts[]>("storedSelectedItems", []);
+    // let [cartItems, setCartItems] = useLocalStorage<TStoreProducts[]>("storedSelectedItems", []);
     const handleSelectedItem = (id?: number | string) => {
         navigate(`/list-products/${id}`)
     }
+    const { cartItems, setCartItems, handleAdd } = useCart()
+    // const handleAdd = (product: TStoreProducts) => {
+    //     let index = cartItems.findIndex(function (item) {
+    //         return item.id === product.id;
+    //     });
 
-    const handleAdd = (product: TStoreProducts) => {
-        let index = cartItems.findIndex(function (item) {
-            return item.id === product.id;
-        });
+    //     if (index > -1) {
+    //         let newCartItems = cartItems.map((cartItem) => {
 
-        if (index > -1) {
-            let newCartItems = cartItems.map((cartItem) => {
+    //             return cartItem.id === product.id ? { ...cartItem, quantity: cartItem.quantity + 1 }
+    //                 : cartItem
+    //         })
+    //         setCartItems(newCartItems)
+    //     } else {
 
-                return cartItem.id === product.id ? { ...cartItem, quantity: cartItem.quantity + 1 }
-                    : cartItem
-            })
-            setCartItems(newCartItems)
-        } else {
+    //         setCartItems([...cartItems, { ...product, quantity: 1 }])
+    //     }
 
-            setCartItems([...cartItems, { ...product, quantity: 1 }])
-        }
-
-    }
+    // }
     return (
         <div >
             <img src={`${product.image}`} alt="Girl in a jacket" width="300" height="400" />

@@ -5,38 +5,20 @@ import { ProductsContext } from "../../state/context"
 import { addProduct } from '../../state/reducer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
-import useLocalStorage from '../../useLocalStorage';
+
+import useCart from '../../useCart';
+
+
+
 function DetailedProduct() {
     const { state, dispatch } = useContext(ProductsContext)
-    let [cartItems, setCartItems] = useLocalStorage<TStoreProducts[]>("storedSelectedItems", []);
+    // let [cartItemsLocal, setCartItemsLocal] = useLocalStorage<TStoreProducts[]>("storedSelectedItems", []);
     let { id } = useParams();
-    let [numOfSelectedProduct, setNumOfSelectedProduct] = useState<number>(0)
-    //them "quantity" bằng cách này thì localStorage không cập nhật.
-    // state.products.map((newProduct: TStoreProducts) => {
-    //     newProduct["quantity"] = 0
 
-    // })
-    // còn thêm như bên dưới thì có 1 vấn đề, cái click đầu tiền nó không ăn quantity
+    const { cartItems, setCartItems, handleAdd } = useCart()
+
     console.log(state.products)
-    const handleAdd = (product: TStoreProducts) => {
-        console.log('duy hi', state, product)
-        let index = cartItems.findIndex(function (item) {
-            return item.id === product.id;
-        });
 
-        if (index > -1) {
-            let newCartItems = cartItems.map((cartItem) => {
-
-                return cartItem.id === product.id ? { ...cartItem, quantity: cartItem.quantity + 1 }
-                    : cartItem
-            })
-            setCartItems(newCartItems)
-        } else {
-
-            setCartItems([...cartItems, { ...product, quantity: 1 }])
-        }
-
-    }
 
     return (
         <div className="">
