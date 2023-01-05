@@ -6,7 +6,9 @@ export interface TProduct {
     getItemQuantity: (id: number) => number,
     increaseCartQuantity: (id: number) => void,
     decreaseCartQuantity: (id: number) => void,
-    removeFromCart: (id: number) => void
+    removeFromCart: (id: number) => void,
+    lang: string,
+    toggleColor: string
 }
 export interface TStoreProducts {
     name: string,
@@ -42,6 +44,7 @@ export const  initialState : TProduct ={
             banner: '/src/assets/imgs/banner1.jpg',
             id: 1,
             quantity: 0
+            
         },
             
         

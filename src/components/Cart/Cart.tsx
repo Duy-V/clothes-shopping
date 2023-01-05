@@ -3,13 +3,12 @@ import { useState, useContext, useEffect } from 'react';
 import { ProductsContext } from "../../state/context"
 import { useReadLocalStorage } from 'usehooks-ts'
 import { TStoreProducts } from "../../state/state"
-
+import useCart from '../../useCart';
 function Cart() {
     const { state, dispatch } = useContext(ProductsContext)
     let [selectedItemsInCart, setSelectedItems] = useState<TStoreProducts>()
-    const cartItems = useReadLocalStorage<TStoreProducts[]>('storedSelectedItems')
-    console.log(cartItems)
-
+    const cartItemsLocal = useReadLocalStorage<TStoreProducts[]>('storedSelectedItems')
+    const { cartItems, setCartItems, handleAdd, handleDelete } = useCart()
     let isOpen = state.openCart()
 
     return (
@@ -35,23 +34,27 @@ function Cart() {
                                 <h1 className="hidden md:block font-bold text-sm md:text-xl text-center">
                                     ITEMS CART<span className="text-teal-600">.</span>
                                 </h1>
-                                {cartItems?.map((cartItem: TStoreProducts) => {
+                                {cartItemsLocal?.map((cartItem: TStoreProducts) => {
                                     return (
                                         <div id="menu" className="flex flex-col space-y-2">
 
-                                            <a
-                                                href=""
+                                            <div
                                                 className="text-sm font-medium text-gray-700 py-2 px-1 hover:bg-[#F6CD8F] hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out flex flex-row"
                                             >
 
                                                 <img src={cartItem.image} className="w-12 h-12 fill-current inline-block mr-3 basis-1/3" />
-                                                <div className='basis-2/3'>
+                                                <div className='basis-2/3 flex flex-col'>
                                                     <span className="mr-3 ">Title: {cartItem.name}</span>
                                                     <b></b>
+                                                    <div>
+                                                        <button onClick={() => handleAdd(cartItem)}>+</button> {cartItem.quantity} <button onClick={() => handleDelete(cartItem)}>-</button>
+                                                    </div>
+
                                                     <span className="mr-3 ">Price: {cartItem.price}x {cartItem.quantity}</span>
+
                                                 </div>
 
-                                            </a>
+                                            </div>
 
                                         </div>
                                     )

@@ -8,8 +8,8 @@ import {
 } from "react-router-dom";
 import ErrorPage from "./ErrorPage";
 import ListProducts from './components/ListProducts/ListProducts';
-
-import Cart from './components/Cart/Cart';
+import HomePage from './pages/HomePage/HomePage';
+import CartPage from './pages/CartPage/CartPage';
 import DetailedProduct from './components/DetailedProduct/DetailedProduct';
 import { TProduct } from './state/state';
 
@@ -20,7 +20,13 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: "/",
+        element: <HomePage />,
+        children: [],
+      },
       { path: "/list-products/:id", element: <DetailedProduct /> },
+
       {
         path: "/list-products",
         element: <ListProducts />,
@@ -28,8 +34,8 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/cart",
-        element: <Cart />,
+        path: "/cart-page",
+        element: <CartPage />,
       }
     ],
   }

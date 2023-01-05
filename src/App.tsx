@@ -8,6 +8,7 @@ import { ProductsContext } from './state/context';
 import FooterPage from './pages/FooterPage/FooterPage';
 import NavBar from './components/NavBar/NavBar';
 import Cart from "./components/Cart/Cart";
+import ModalMessage from './components/Modal/ModalMessage';
 function App() {
   const [state, dispatch] = useReducer(productsReducer, initialState);
   let isOpen = state.openCart()
@@ -18,17 +19,12 @@ function App() {
     <ProductsContext.Provider value={{ state, dispatch }}>
       <div>
         <div >
-
+          <ModalMessage />
           <NavBar />
-          {
+          {/* {
             isOpen ? (<div>
 
-
-
               <Outlet />
-
-
-
               <div className="mt-[-203.7vh]">
 
                 <Cart />
@@ -37,12 +33,15 @@ function App() {
 
               <Outlet />
             </div>)
-          }
+          } */}
+
+          <Cart />
+          <Outlet />
         </div>
 
         <FooterPage />
       </div>
-    </ProductsContext.Provider>
+    </ProductsContext.Provider >
 
   )
 }

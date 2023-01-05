@@ -12,7 +12,7 @@ import useCart from '../../useCart';
 
 function DetailedProduct() {
     const { state, dispatch } = useContext(ProductsContext)
-    // let [cartItemsLocal, setCartItemsLocal] = useLocalStorage<TStoreProducts[]>("storedSelectedItems", []);
+
     let { id } = useParams();
 
     const { cartItems, setCartItems, handleAdd } = useCart()
