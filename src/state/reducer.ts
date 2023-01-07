@@ -3,21 +3,21 @@ import { ProductsActions, ActionType, AddProduct, RemoveProduct, OpenCart } from
 
 export function productsReducer(state : TProduct, action : ProductsActions): TProduct {
     switch (action.type) {
-        case ActionType.AddProduct:
-            console.log(state)
-            let newNumOfSelectedProducts = action.payload.numOfSelectedProduct
-            return {
-                ... state,
-                products: state.products.map((product: TStoreProducts) =>
-                product.id === action.payload.product.id
-                  ? {
-                      ...product,
-                      countInStock: action.payload.product.countInStock
-                    }
-                  : product
-              ),
-                numOfSelectedProducts: newNumOfSelectedProducts
-            };
+        // case ActionType.AddProduct:
+        //     console.log(state)
+        //     let newNumOfSelectedProducts = action.payload.numOfSelectedProduct
+        //     return {
+        //         ... state,
+        //         products: state.products.map((product: TStoreProducts) =>
+        //         product.id === action.payload.product.id
+        //           ? {
+        //               ...product,
+        //               countInStock: action.payload.product.countInStock
+        //             }
+        //           : product
+        //       ),
+        //         numOfSelectedProducts: newNumOfSelectedProducts
+        //     };
             case ActionType.OpenCart:
                 let isOpen = action.payload.isOpen
             console.log(isOpen)

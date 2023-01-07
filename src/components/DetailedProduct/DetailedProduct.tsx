@@ -15,7 +15,7 @@ function DetailedProduct() {
 
     let { id } = useParams();
 
-    const { cartItems, setCartItems, handleAdd } = useCart()
+    const { handleAdd } = useCart()
 
     console.log(state.products)
 

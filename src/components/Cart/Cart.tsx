@@ -12,12 +12,12 @@ function Cart() {
     let isOpen = state.openCart()
 
     return (
-        <div>
+        <div className="z-10">
             {isOpen ? (
-                <body className="font-poppins antialiased mt-[-50px] z-10 " >
+                <body className="font-poppins antialiased mt-[-50px]  " >
                     <div
                         id="view"
-                        className="h-full w-screen flex flex-row"
+                        className="h-full flex flex-row"
                         x-data="{ sidenav: true }"
                     >
 

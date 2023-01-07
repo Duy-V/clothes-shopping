@@ -12,7 +12,7 @@ function ListProducts() {
     return (
         <div>
             {isOpen ? (
-                <div className="container ml-[300px]">
+                <div className="container ">
 
                     <div className="flex gap-y-6 gap-x-6 flex-wrap justify-center">
                         {state.products.map((product) => {

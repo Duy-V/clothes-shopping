@@ -20,10 +20,10 @@ function Product({ product }: Props) {
     const { cartItems, setCartItems, handleAdd } = useCart()
 
     return (
-        <div >
+        <div onClick={() => handleSelectedItem(product.id)}>
             <img src={`${product.image}`} alt="Girl in a jacket" width="300" height="400" />
             <div className="flex flex-col">
-                <div className="flex flex-col items-center mb-3" onClick={() => handleSelectedItem(product.id)}>
+                <div className="flex flex-col items-center mb-3" >
                     <h4>{product.name}</h4>
                     <h4>{product.brand}</h4>
                     <div className="flex ">

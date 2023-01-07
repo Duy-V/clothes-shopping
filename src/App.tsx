@@ -21,22 +21,26 @@ function App() {
         <div >
           <ModalMessage />
           <NavBar />
-          {/* {
-            isOpen ? (<div>
+          {
+            isOpen ? (
+              <div className="flex flex-row">
 
-              <Outlet />
-              <div className="mt-[-203.7vh]">
+                <div className="basis-1/4">
 
-                <Cart />
-              </div>
-            </div>) : (<div className="mt-[8vh]">
+                  <Cart />
+                </div>
+                <div className="basis-3/4">
 
-              <Outlet />
-            </div>)
-          } */}
+                  <Outlet />
+                </div>
 
-          <Cart />
-          <Outlet />
+
+              </div>) : <Outlet />
+
+          }
+
+          {/* <Cart /> 
+          <Outlet />*/}
         </div>
 
         <FooterPage />

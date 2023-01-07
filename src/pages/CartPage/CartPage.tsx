@@ -1,8 +1,10 @@
 import React from 'react'
 import { useReadLocalStorage } from 'usehooks-ts'
 import { TStoreProducts } from '../../state/state'
+import useCart from "../../useCart"
 function CartPage() {
     const cartItemsLocal = useReadLocalStorage<TStoreProducts[]>('storedSelectedItems')
+    const { cartItems, setCartItems, handleAdd, handleDelete } = useCart()
     return (
         <body className="bg-[#eadfcb] flex flex-col justify-center items-center h-screen gap-10">
             <table className="shadow-2xl font-[Poppins] border-2 border-cyan-200 w-6/12">
@@ -21,7 +23,10 @@ function CartPage() {
                         return (<tr className="bg-[#f4e9d6] cursor-pointer duration-3 " key={index}>
                             <td className="py-3 px-6">1</td>
                             <td className="py-3 px-6">{item.name}</td>
-                            <td className="py-3 px-6">{item.quantity}</td>
+
+                            <td className="py-3 px-6">
+
+                                <button onClick={() => handleAdd(item)}>+</button> {item.quantity} <button onClick={() => handleDelete(item)}>-</button></td>
                             <td className="py-3 px-6">{item.name} * {item.price}</td>
                         </tr>)
                     })
